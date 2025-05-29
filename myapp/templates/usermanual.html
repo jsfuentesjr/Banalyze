@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}User Manual - Banalyze{% endblock %}
+
+{% block content %}
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+
+    .message-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .message-box h2 {
+        margin: 0 0 10px;
+    }
+
+    .message-box p {
+        margin: 0;
+    }
+
+    .message-box a {
+        color: #388e3c;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .message-box a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container">
+    <div class="message-box">
+        <h2>Need Help?</h2>
+        <p>For more information on how to use the application and prior processes, see the <a href="https://drive.google.com/file/d/your_google_drive_file_id/view?usp=sharing" target="_blank">User Manual</a>.</p>
+    </div>
+</div>
+{% endblock %}
+

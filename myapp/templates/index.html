@@ -1,0 +1,173 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .upload-section {
+        margin: 2rem auto;
+        max-width: 600px;
+        width: 100%;
+        padding: 2rem;
+        border: 2px dashed #4caf50;
+        border-radius: 12px;
+        background-color: #ffffff;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        transition: background-color 0.3s, border-color 0.3s;
+        position: relative;
+    }
+    .upload-section:hover {
+        background-color: #f8f9fa;
+        border-color: #388e3c;
+    }
+    .upload-section h2 {
+        color: #4caf50;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        font-size: 1.5rem;
+    }
+    .upload-section p {
+        color: #666;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+    .upload-section input[type="file"] {
+        display: none;
+    }
+    .upload-section label {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 0.5rem;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+    .upload-section label:hover {
+        background-color: #388e3c;
+        transform: scale(1.05);
+    }
+    .uploaded-image-container {
+        margin-top: 1rem;
+        width: 100%;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        border: 2px solid #4caf50;
+        position: relative;
+    }
+    .uploaded-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        display: none;
+    }
+    .placeholder-icon {
+        width: 100px;
+        height: 100px;
+        background-color: #4caf50;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 24px;
+    }
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1.5rem;
+    }
+    .button-container button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.25rem;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-bottom: 1rem;
+        width: 48%;
+    }
+    .button-container button:hover {
+        background-color: #388e3c;
+        transform: scale(1.05);
+    }
+    .error-message {
+        color: red;
+        font-weight: bold;
+        margin-top: 1rem;
+    }
+    </style>
+
+    <form id="uploadForm" action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+        <div class="upload-section" id="uploadSection">
+            <h2>Upload Image for Banana Counting and Disease Detection</h2>
+            <p>Drag & drop an image or click below to upload</p>
+            <input type="file" id="imageInput" name="file" accept="image/*">
+            <label for="imageInput">Choose Image</label>
+            <div class="uploaded-image-container" id="imageContainer">
+                <img id="uploadedImage" class="uploaded-image" src="#" alt="Uploaded Image">
+                <img id="placeholderIcon" class="placeholder-icon" src="{{ url_for('logo_file', filename='galleryplaceholder.png') }}" alt="Placeholder Icon">
+            </div>
+            <div class="button-container">
+                <button type="submit" name="bananaCount" id="estimateBtn">Banana Count</button>
+                <button type="submit" name="healthCheck" id="healthCheckBtn">Health Check</button>
+            </div>
+            <p id="errorMessage" class="error-message" style="display: none;">Please upload an image before proceeding.</p>
+            <input type="hidden" id="filePathInput" name="file_path" value="">
+        </div>
+    </form>
+    
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('uploadedImage').src = e.target.result;
+                    document.getElementById('uploadedImage').style.display = 'block';
+                    document.getElementById('placeholderIcon').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                document.getElementById('uploadedImage').style.display = 'none';
+                document.getElementById('placeholderIcon').style.display = 'block';
+            }
+        });
+    
+        const estimateBtn = document.getElementById('estimateBtn');
+        const healthCheckBtn = document.getElementById('healthCheckBtn');
+        const fileInput = document.getElementById('imageInput');
+    
+        estimateBtn.addEventListener('click', function(event) {
+            if (fileInput.files.length === 0) {
+                event.preventDefault();
+                document.getElementById('errorMessage').style.display = 'block';
+            } else {
+                document.getElementById('errorMessage').style.display = 'none';
+            }
+        });
+    
+        healthCheckBtn.addEventListener('click', function(event) {
+            if (fileInput.files.length === 0) {
+                event.preventDefault();
+                document.getElementById('errorMessage').style.display = 'block';
+            } else {
+                document.getElementById('errorMessage').style.display = 'none';
+            }
+        });
+    </script>
+    
+{% endblock %}

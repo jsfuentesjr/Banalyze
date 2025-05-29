@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        .result-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 2rem auto;
+            max-width: 800px;
+            width: 100%;
+            padding: 2rem;
+            border: 1px solid #4caf50;
+            border-radius: 12px;
+            background-color: #ffffff;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        .result-section img {
+            max-width: 45%;
+            border-radius: 8px;
+        }
+        .result-text {
+            max-width: 50%;
+            text-align: left;
+            margin-left: 2rem;
+        }
+        .result-text h2 {
+            color: #4caf50;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1.75rem;
+        }
+        .result-text p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.25rem;
+        }
+        .result-number {
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .back-button {
+            background-color: #4caf50;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+        .back-button:hover {
+            background-color: #388e3c;
+            transform: scale(1.05);
+        }
+    </style>
+
+    <div class="result-section">
+        <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Image">
+        <div class="result-text">
+            <h2>Results</h2>
+            <p>The estimated banana count from the given image is <span class="result-number">{{ banana_count }}</span></p>
+            <p>The estimated total weight of the banana bunches that can be harvested is between <span class="result-number">{{ min_bunch_weight }}</span> and <span class="result-number">{{ max_bunch_weight }}</span> kilograms.</p>
+            <p>The estimated total banana production after dehandling and packing is between <span class="result-number">{{ min_net_weight }}</span> and <span class="result-number">{{ max_net_weight }}</span> kilograms, ready for the market.</p>
+            <a href="{{ url_for('index') }}" class="back-button">Upload another image</a>
+        </div>
+    </div>
+{% endblock %}

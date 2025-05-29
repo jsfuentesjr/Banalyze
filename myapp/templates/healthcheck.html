@@ -1,0 +1,168 @@
+<!-- healthcheck.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .result-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 2rem auto;
+        max-width: 800px;
+        width: 100%;
+        padding: 2rem;
+        border: 1px solid #4caf50;
+        border-radius: 12px;
+        background-color: #ffffff;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+    }
+
+    .result-section {
+        display: flex;
+        justify-content: center; /* Center the items horizontally */
+        align-items: center; /* Center items vertically */
+        width: 100%;
+        margin-bottom: 1rem; /* Reduce margin below the result section */
+    }
+
+    .result-section img {
+        max-width: 45%; /* Adjust based on your design needs */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 8px;
+    }
+
+    .result-text {
+        text-align: center; /* Center the text */
+        max-width: 50%;
+        margin-left: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Center the content vertically */
+        padding-right: 2rem; /* Add padding to the right for better centering */
+    }
+
+    .result-text h2 {
+        color: #4caf50;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        font-size: 1.75rem;
+    }
+
+    .result-text p {
+        color: #666;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+    }
+
+    .back-button {
+        background-color: #4caf50;
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        transition: background-color 0.3s, transform 0.2s;
+        display: inline-block;
+        margin-top: 1rem; /* Add margin above the button */
+    }
+
+    .back-button:hover {
+        background-color: #388e3c;
+        transform: scale(1.05);
+    }
+
+    .recommendations {
+        margin-top: 1rem; /* Reduce margin above recommendations */
+        text-align: left; /* Align text to the left */
+        width: 100%;
+        padding: 2rem;
+        border: 1px solid #4caf50;
+        border-radius: 12px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+    }
+
+    .recommendations h3 {
+        color: #4caf50;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .recommendations p {
+        color: #666;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="result-container">
+    <div class="result-section">
+        <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Image">
+        <div class="result-text">
+            <h2>Diagnosis</h2>
+            <p>Diagnosis: {{ diagnosis }}</p>
+            <a href="{{ url_for('index') }}" class="back-button">Upload another image</a>
+        </div>
+    </div>
+
+    {% if diagnosis == "Fusarium Wilt" or "Both Black Sigatoka and Fusarium Wilt" in diagnosis %}
+    <div class="recommendations">
+        <h3>Crop Recommendations for Fusarium Wilt</h3>
+        <p><strong>Option 1: Basic Treatment</strong></p>
+        <p>1. Rouging: Completely remove and destroy banana plants that are infected to prevent the spread of Fusarium Wilt.</p>
+        <p>2. Sanitize Tools: Sanitize tools used for handling infected banana plants by dipping them in disinfectants.</p>
+
+        <p><strong>Option 2: Intermediate Treatment</strong></p>
+        <p>1. Rouging: Completely remove and destroy banana plants that are infected to prevent the spread of Fusarium Wilt.</p>
+        <p>2. Sanitize Tools: Sanitize tools used for handling infected banana plants by dipping them in disinfectants.</p>
+        <p>3. Foot Baths: Maintain foot baths with adequate disinfectant at every banana field entrance to prevent the disease's introduction and spread.</p>
+        <p>4. Trichoderma Application: Use a biological agent like Trichoderma around the soil to introduce beneficial fungi that suppress Fusarium spores.</p>
+        <p>5. Soil Treatment with Lime: Apply lime to the soil to raise pH levels, creating an environment less favorable for Fusarium.</p>
+
+        <p><strong>Option 3: Advanced Treatment</strong></p>
+        <p>1. Rouging: Completely remove and destroy banana plants that are infected to prevent the spread of Fusarium Wilt. Fence off areas where infected banana plants have been eradicated to prevent the spread of the disease and limit contact with healthy plants.</p>
+        <p>2. Sanitize Tools: Sanitize tools used for handling infected banana plants by dipping them in disinfectants.</p>
+        <p>3. Foot Baths: Maintain foot baths with adequate disinfectant at every entrance in the banana field to prevent the introduction and spread of the disease.</p>
+        <p>4. Field Fencing: Fence the entire banana field to enhance security and prevent unauthorized access, reducing the risk of disease introduction and spread.</p>
+        <p>5. Drainage System: Establish an effective drainage or canal system to prevent waterlogging and promote soil aeration.</p>
+        <p>6. Trichoderma Application: Use a biological agent like Trichoderma around the soil to introduce beneficial fungi that suppress Fusarium spores.</p>
+        <p>7. Soil Treatment with Lime: Apply lime to the soil to raise pH levels, creating an environment less favorable for Fusarium.</p>
+        <p>8. Amosul Application: Use Amosul (ammonium sulfamate) as a soil drench to kill Fusarium spores.</p>
+        <p>9. Microbial Solutions: Apply microbial solutions containing beneficial microbes to the soil to outcompete Fusarium and improve soil health.</p>
+        <p>10. Isolation Techniques: Use plastic bags to cover and isolate infected banana plants, containing the spread of the disease. Enhanced plastic bagging can be supplemented with additional inputs like lime and microbial solutions.</p>
+        <p>11. Disease-Resistant Varieties: Use disease-resistant banana varieties to prevent the spread of Fusarium Wilt.</p>
+    </div>
+    {% endif %}
+
+    {% if diagnosis == "Black Sigatoka" or "Both Black Sigatoka and Fusarium Wilt" in diagnosis %}
+    <div class="recommendations">
+        <h3>Crop Recommendations for Black Sigatoka</h3>
+        <p><strong>Option 1: Basic Treatment</strong></p>
+        <p>1. Regular Deleafing: Regularly deleaf by removing and destroying infected leaves to reduce the spread of Black Sigatoka.</p>
+        <p>2. Sanitize Tools: Sanitize all tools used for deleafing to prevent the spread of the disease.</p>
+
+        <p><strong>Option 2: Intermediate Treatment</strong></p>
+        <p>1. Regular Deleafing: Regularly deleaf by removing and destroying infected leaves to reduce the spread of Black Sigatoka.</p>
+        <p>2. Sanitize Tools: Sanitize all tools used for deleafing to prevent the spread of the disease.</p>
+        <p>3. Mancozeb with APSA: Use Mancozeb mixed with APSA (Adjuvant Penetrant Spreader Activator) for enhanced efficacy. This combination helps improve the adhesion and penetration of the fungicide.</p>
+        <p>4. Tilt (Propiconazole): Apply Tilt, a systemic fungicide, which provides effective control by inhibiting the growth of the fungus from within the plant.</p>
+
+        <p><strong>Option 3: Advanced Treatment</strong></p>
+        <p>1. Regular Deleafing: Regularly deleaf by removing and destroying infected leaves to reduce the spread of Black Sigatoka.</p>
+        <p>2. Sanitize Tools: Sanitize all tools used for deleafing to prevent the spread of the disease.</p>
+        <p>3. Mancozeb with APSA: Use Mancozeb mixed with APSA (Adjuvant Penetrant Spreader Activator) for enhanced efficacy. This combination helps improve the adhesion and penetration of the fungicide.</p>
+        <p>4. Tilt (Propiconazole): Apply Tilt, a systemic fungicide, which provides effective control by inhibiting the growth of the fungus from within the plant.</p>
+        <p>5. Sico: Use Sico, another fungicide, as part of the treatment plan to protect the plants and manage the disease.</p>
+        <p>6. Omega (Fluazinam): Apply Omega, a broad-spectrum fungicide, to protect the banana plants from Black Sigatoka.</p>
+        <p>7. Fungicide Rotation: Rotate these fungicides to prevent resistance development.</p>
+    </div>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}
+

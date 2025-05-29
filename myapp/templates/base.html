@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banalyze</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+        body {
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        header {
+            background-color: #4caf50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            font-weight: 600;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #388e3c;
+            padding: 0 2rem;
+        }
+        nav .brand {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        nav .brand img {
+            margin-right: 0.2rem;
+            height: 50px; /* Increase the height as needed */
+        }
+        nav .menu {
+            display: flex;
+        }
+        nav a {
+            color: white;
+            padding: 1rem;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        nav a:hover {
+            background-color: #2e7d32;
+        }
+        main {
+            flex: 1;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem; /* Add margin to ensure content does not overlap with the footer */
+        }
+        footer {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            position: relative;
+            width: 100%;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="brand">
+            <img src="{{ url_for('logo_file', filename='logo.png') }}" alt="Logo">
+            Banalyze
+        </div>
+        <div class="menu">
+            <a href="/about">About</a>
+            <a href="/usermanual">User Manual</a> <!-- Updated this line -->
+            <a href="/contact">Contact</a>
+        </div>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        &copy; 2024 Banalyze
+    </footer>
+</body>
+</html>
+
+
